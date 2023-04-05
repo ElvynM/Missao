@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/usuarios',[UsuariosController::class,'index']);
-route::get('/usuarios/criar',[UsuariosController::class,'create']);
+Route::get('/usuarios/criar',[UsuariosController::class,'create']);
 Route::post('/usuarios/criar',[UsuariosController::class,'store']);
 
 Route::get('/', function () {

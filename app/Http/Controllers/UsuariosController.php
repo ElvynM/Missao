@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Usuarios;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
@@ -33,8 +32,6 @@ class UsuariosController extends Controller
         $dt_conversao = $request->dt_conversao;
         $genero = $request->genero;
         
-       
-    
         $usuario = new Usuarios();
         $usuario->nome = $nome;
         $usuario->email = $email;
@@ -47,6 +44,7 @@ class UsuariosController extends Controller
         $usuario->dt_conversao = $dt_conversao;
         $usuario->genero = $genero;
         $usuario->save();
+        return redirect('/usuarios');
 
    }
 }

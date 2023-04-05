@@ -118,8 +118,8 @@
                             <td><?= $serie->nome ?></td>
                             <td><?= $serie->telefone ?></td>
                             <td><?= $serie->email ?></td>
-                        @endforeach
                     </tr>
+                    @endforeach
                 </tbody>
 
             </table>
