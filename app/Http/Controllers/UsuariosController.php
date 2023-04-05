@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
 { 
-   public function index(){
-    $usuarios = Usuarios::all();
+   public function index(Request $request){
+   //  $usuarios = Usuarios::all();
+   $usuarios = Usuarios::query()->orderBy('nome')->get();
+   $mensagem = $request->session()->get('mensagem');
      return view('usuarios.home',[
-      'series' => $usuarios
+      'series' => $usuarios,
+      'mensagem' => $mensagem
      ]);
    }
 
@@ -44,6 +47,7 @@ class UsuariosController extends Controller
         $usuario->dt_conversao = $dt_conversao;
         $usuario->genero = $genero;
         $usuario->save();
+        $request->session()->flash('mensagem', "Usuário {$usuario->nome} cadastrado com Sucesso!");
         return redirect('/usuarios');
 
    }

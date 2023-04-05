@@ -21,7 +21,14 @@
 
         <div class="jumbotron jumbotron-fluid mb-2">
             <div class="container">
-                <h1 class="display-4">teste</h1>
+                <h1 class="display-4">
+                  @if (!empty($mensagem))
+                      <div class="alert alert-success">
+                        {{ $mensagem}}
+                      </div>
+                  @endif
+
+                </h1>
             </div>
         </div>
     </div>
@@ -118,6 +125,10 @@
                             <td><?= $serie->nome ?></td>
                             <td><?= $serie->telefone ?></td>
                             <td><?= $serie->email ?></td>
+                            <td>
+                                <a href="/nome_da_rota/edit/{{ $serie->id }}">Editar</a>
+                                <a href="/nome_da_rota/delete/{{ $serie->id }}">Excluir</a>
+                            </td>
                     </tr>
                     @endforeach
                 </tbody>
