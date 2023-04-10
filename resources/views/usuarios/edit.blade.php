@@ -15,7 +15,7 @@
     <div class="container mb-2">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">Edição</a>
             </div>
         </nav>
 
@@ -35,8 +35,8 @@
 
     <div class="container mb-2">
 
-        <a href="usuarios/criar" class="btn btn-dark mb-4" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Adicionar</a>
+        <a href="{{ route('update',$usuarios->id)}}" class="btn btn-dark mb-4" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Atualizar</a>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -46,53 +46,50 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/usuarios/criar">
+                        <form method="POST" action="{{ route('update',$usuarios->id)}}">
                             @csrf
                             <div class="row mb-2">
                                 <div class="col">
-                                    <input type="text" name="nome" class="form-control" placeholder="Nome">
+                                    <input type="text" name="nome" value="{{ $usuarios->nome}}" class="form-control" placeholder="Nome">
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="email" class="form-control" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <input type="text" name="telefone" class="form-control" placeholder="Telefone">
-                                </div>
-                                <div class="col">
-                                    <input type="text" name="endereco" class="form-control" placeholder="Endereco">
+                                    <input type="text" name="email" value="{{ $usuarios->email}}" class="form-control" placeholder="Email">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <input type="text" name="cidade" class="form-control" placeholder="Cidade">
+                                    <input type="text" name="telefone" value="{{ $usuarios->telefone }}" class="form-control" placeholder="Telefone">
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="complemento" class="form-control"
+                                    <input type="text" name="endereco" value="{{ $usuarios->endereco }}" class="form-control" placeholder="Endereco">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <input type="text" name="cidade" value="{{ $usuarios->cidade }}" class="form-control" placeholder="Cidade">
+                                </div>
+                                <div class="col">
+                                    <input type="text" name="complemento" value="{{ $usuarios->complemento}}" class="form-control"
                                         placeholder="Complemento">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <input type="date" name="dt_nascimento" class="form-control">
+                                    <input type="date" value="{{ $usuarios->dt_nascimento}}" name="dt_nascimento" class="form-control">
                                 </div>
                                 <div class="col">
-                                    <input type="date" name="dt_batismo" class="form-control" placeholder="Batismo">
+                                    <input type="date" name="dt_batismo" value="{{ $usuarios->dt_batismo }}" class="form-control" placeholder="Batismo">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <input type="date" name="dt_conversao" class="form-control">
+                                    <input type="date" name="dt_conversao" value="{{ $usuarios->dt_conversao }}" class="form-control">
                                 </div>
                                 <div class="col">
                                     <select name="genero" class="form-control">
-                                        <option value="">Selecione um gênero</option>
-                                        <option value="masculino">Masculino</option>
-                                        <option value="Feminino">Feminino</option>
-                                        {{-- @foreach ($generos as $id => $genero)
-                                            <option value="{{ $id }}">{{ $genero }}</option>
-                                        @endforeach --}}
+                                        @foreach($usuarios as $value => $label)
+                                            <option value="{{ $value }}">{{ $label }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -106,34 +103,6 @@
 
                 </div>
             </div>
-        </div>
-
-        <div class="container">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Nº</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Telefone</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        @foreach ($series as $serie)
-                            <th scope="row"><?= $serie->id ?></th>
-                            <td><?= $serie->nome ?></td>
-                            <td><?= $serie->telefone ?></td>
-                            <td><?= $serie->email ?></td>
-                            <td>
-                                <a href="{{ route('list_edit',$serie->id)}}">Editar</a>
-                                <a href="/nome_da_rota/delete/{{ $serie->id }}">Excluir</a>
-                            </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-
-            </table>
         </div>
     </div>
 
