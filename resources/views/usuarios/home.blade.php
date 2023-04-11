@@ -120,14 +120,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        @foreach ($series as $serie)
-                            <th scope="row"><?= $serie->id ?></th>
-                            <td><?= $serie->nome ?></td>
-                            <td><?= $serie->telefone ?></td>
-                            <td><?= $serie->email ?></td>
+                        @foreach ($usuarios as $usuario)
+                            <th scope="row"><?= $usuario->id ?></th>
+                            <td><?= $usuario->nome ?></td>
+                            <td><?= $usuario->telefone ?></td>
+                            <td><?= $usuario->email ?></td>
                             <td>
-                                <a href="{{ route('list_edit',$serie->id)}}">Editar</a>
-                                <a href="/nome_da_rota/delete/{{ $serie->id }}">Excluir</a>
+                                <a href="{{ route('list_edit',$usuario->id)}}">Editar</a>
+                                <a href="/nome_da_rota/delete/{{ $usuario->id }}">Excluir</a>
                             </td>
                     </tr>
                     @endforeach
