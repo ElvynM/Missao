@@ -13,18 +13,20 @@ class UsuariosController extends Controller
       $usuarios = Usuarios::paginate(5);
       $mensagem = $request->session()->get('mensagem');
       $request->session()->forget('mensagem');
-      // $mensagemSucesso = $request->session('mensagemSucesso');
-      // $mensagemSucesso = $request->session()->forget('mensagemSucesso');
 
       return view('usuarios.home', [
         'usuarios' => $usuarios,
         'mensagem' => $mensagem,
-        // 'mensagemSucesso' => $mensagemSucesso,
       ]);
   }
 
   public function store(Request $request){
-
+      $request->validate(
+        [
+          'nome' => 'required','min:3',
+          'email' => 'required', 'unique:usuarios,email'
+        ]
+      );
       $usuario = Usuarios::create($request->all());
       $request->session()->put('mensagem', "Usuário {$usuario->nome} cadastrado com Sucesso!");
   
@@ -34,12 +36,11 @@ class UsuariosController extends Controller
   public function edit(Request $request)
   {
 
-    $id = $request->id;
+      $id = $request->id;
+      $usuario = Usuarios::find($id);
 
-    $usuario = Usuarios::find($id);
-
-    if (isset($usuario)) {
-      return view('usuarios.edit', [
+    if(isset($usuario)) {
+        return view('usuarios.edit', [
         'usuarios' => $usuario,
       ]);
     }
@@ -49,29 +50,23 @@ class UsuariosController extends Controller
 
   public function update(Request $request, $id)
   {
-    $usuario = new Usuarios();
-
-    $usuario = Usuarios::find($id);
-
-    $usuario->update($request->all());
+      $usuario = new Usuarios();
+      $usuario = Usuarios::find($id);
+      $usuario->update($request->all());
 
     return redirect('usuarios');
   }
 
   public function delete(Request $request){
     
-    $usuario = Usuarios::find($request->id);
-    $id = $usuario->id;
+      $usuario = Usuarios::find($request->id);
+      $id = $usuario->id;
 
-   
-
-    
-    
     if($id){
 
       Usuarios::destroy($id);
       $request->session()->put('mensagem', "Usuário {$request->nome} excluído com Sucesso!");
-      // $request->flash('mensagem',"Usuário {$id} excluído com Sucesso! ");
+
       return redirect('usuarios');
     } 
   }

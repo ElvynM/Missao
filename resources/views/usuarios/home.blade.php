@@ -21,25 +21,26 @@
 
         <div class="jumbotron jumbotron-fluid mb-2">
             <div class="container">
-                
-                @if(isset($mensagem))
-                {{-- @if (strpos($mensagem,'excluído') === false)
+
+                @if (isset($mensagem))
+                    {{-- @if (strpos($mensagem, 'excluído') === false)
                   
                 @endif --}}
-                @if (strpos($mensagem,'excluído') === false)
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ $mensagem }}</strong> .
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div> 
-                @else
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>{{ $mensagem }}</strong> .
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div> 
-                    
+                    @if (strpos($mensagem, 'excluído') === false)
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ $mensagem }}</strong> .
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @else
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{ $mensagem }}</strong> .
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
+
                 @endif
-                
-               @endif
             </div>
         </div>
     </div>
@@ -49,6 +50,7 @@
         <a href="usuarios/criar" class="btn btn-dark mb-4" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Adicionar</a>
 
+
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -57,6 +59,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" action="/usuarios/criar">
                             @csrf
                             <div class="row mb-2">
@@ -108,7 +119,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
                                 <button class="btn btn-primary">Adicionar</button>
                             </div>
                         </form>
@@ -136,13 +148,13 @@
                             <td><?= $usuario->telefone ?></td>
                             <td><?= $usuario->email ?></td>
                             <td>
-                                <a href="{{ route('list_edit',$usuario->id)}}" class="btn btn-primary">Editar</a>
-                                <a href="{{ route('delete',$usuario->id) }}" class="btn btn-danger">Excluir</a>
+                                <a href="{{ route('list_edit', $usuario->id) }}" class="btn btn-primary">Editar</a>
+                                <a href="{{ route('delete', $usuario->id) }}" class="btn btn-danger">Excluir</a>
                             </td>
                     </tr>
                     @endforeach
                 </tbody>
-              
+
             </table>
             <div class="d-flex justify-content-center">
                 {{ $usuarios->links('pagination::bootstrap-5') }}
