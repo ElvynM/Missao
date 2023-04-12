@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    // return view('welcome');
+    //return view('welcome');
     return redirect('/usuarios');
 });
 
@@ -23,7 +23,8 @@ Route::controller(UsuariosController::class)->group(function(){
     Route::get('/usuarios/criar','create');
     Route::post('/usuarios/criar','store');
     Route::get('/usuarios/edit/{id}','edit')->name('list_edit');
-    route::post('/usuarios/edit/{id}','update')->name('update');
+    Route::post('/usuarios/edit/{id}','update')->name('update');
+    Route::get('/usuarios/delete/{id}','delete')->name('delete');
 });
 
 
