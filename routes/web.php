@@ -13,14 +13,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/usuarios',[UsuariosController::class,'index']);
-Route::get('/usuarios/criar',[UsuariosController::class,'create']);
-Route::post('/usuarios/criar',[UsuariosController::class,'store']);
-Route::get('/usuarios/edit/{id}',[UsuariosController::class,'edit'])->name('list_edit');
-route::post('/usuarios/edit/{id}',[UsuariosController::class,'update'])->name('update');
-
-
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/usuarios');
 });
+
+Route::controller(UsuariosController::class)->group(function(){
+    Route::get('/usuarios','index');
+    Route::get('/usuarios/criar','create');
+    Route::post('/usuarios/criar','store');
+    Route::get('/usuarios/edit/{id}','edit')->name('list_edit');
+    route::post('/usuarios/edit/{id}','update')->name('update');
+});
+
+
+
+
+

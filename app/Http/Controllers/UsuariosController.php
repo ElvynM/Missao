@@ -10,8 +10,9 @@ class UsuariosController extends Controller
 {
   public function index(Request $request)
   {
-    //  $usuarios = Usuarios::all();
-    $usuarios = Usuarios::query()->orderBy('id')->get();
+     $usuarios = Usuarios::paginate(5);
+
+    // $usuarios = Usuarios::query()->orderBy('id')->get();
     $mensagem = $request->session()->get('mensagem');
     return view('usuarios.home', [
       'usuarios' => $usuarios,
@@ -19,32 +20,32 @@ class UsuariosController extends Controller
     ]);
   }
 
-  public function store(Request $request)
-  {
+  public function store(Request $request){
 
-    $nome = $request->nome;
-    $email = $request->email;
-    $telefone = $request->telefone;
-    $endereco = $request->endereco;
-    $cidade = $request->cidade;
-    $complemento = $request->complemento;
-    $dt_nascimento = $request->dt_nascimento;
-    $dt_batismo = $request->dt_batismo;
-    $dt_conversao = $request->dt_conversao;
-    $genero = $request->genero;
+    // $nome = $request->nome;
+    // $email = $request->email;
+    // $telefone = $request->telefone;
+    // $endereco = $request->endereco;
+    // $cidade = $request->cidade;
+    // $complemento = $request->complemento;
+    // $dt_nascimento = $request->dt_nascimento;
+    // $dt_batismo = $request->dt_batismo;
+    // $dt_conversao = $request->dt_conversao;
+    // $genero = $request->genero;
 
-    $usuario = new Usuarios();
-    $usuario->nome = $nome;
-    $usuario->email = $email;
-    $usuario->telefone = $telefone;
-    $usuario->endereco = $endereco;
-    $usuario->cidade = $cidade;
-    $usuario->complemento = $complemento;
-    $usuario->dt_nascimento = $dt_nascimento;
-    $usuario->dt_batismo = $dt_batismo;
-    $usuario->dt_conversao = $dt_conversao;
-    $usuario->genero = $genero;
-    $usuario->save();
+    // $usuario = new Usuarios();
+    // $usuario->nome = $nome;
+    // $usuario->email = $email;
+    // $usuario->telefone = $telefone;
+    // $usuario->endereco = $endereco;
+    // $usuario->cidade = $cidade;
+    // $usuario->complemento = $complemento;
+    // $usuario->dt_nascimento = $dt_nascimento;
+    // $usuario->dt_batismo = $dt_batismo;
+    // $usuario->dt_conversao = $dt_conversao;
+    // $usuario->genero = $genero;
+    // $usuario->save();
+   $usuario = Usuarios::create($request->all());
     $request->session()->flash('mensagem', "Usuário {$usuario->nome} cadastrado com Sucesso!");
     return redirect('/usuarios');
   }

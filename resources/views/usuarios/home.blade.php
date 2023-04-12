@@ -21,14 +21,12 @@
 
         <div class="jumbotron jumbotron-fluid mb-2">
             <div class="container">
-                <h1 class="display-4">
-                  @if (!empty($mensagem))
-                      <div class="alert alert-success">
-                        {{ $mensagem}}
-                      </div>
-                  @endif
-
-                </h1>
+                @if(!empty($mensagem))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ $mensagem }}</strong> .
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+               @endif   
             </div>
         </div>
     </div>
@@ -96,7 +94,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">Adicionar</button>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button class="btn btn-primary">Adicionar</button>
@@ -126,14 +123,17 @@
                             <td><?= $usuario->telefone ?></td>
                             <td><?= $usuario->email ?></td>
                             <td>
-                                <a href="{{ route('list_edit',$usuario->id)}}">Editar</a>
-                                <a href="/nome_da_rota/delete/{{ $usuario->id }}">Excluir</a>
+                                <a href="{{ route('list_edit',$usuario->id)}}" class="btn btn-primary">Editar</a>
+                                <a href="/nome_da_rota/delete/{{ $usuario->id }}" class="btn btn-danger">Excluir</a>
                             </td>
                     </tr>
                     @endforeach
                 </tbody>
-
+              
             </table>
+            <div class="d-flex justify-content-center">
+                {{ $usuarios->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     </div>
 
