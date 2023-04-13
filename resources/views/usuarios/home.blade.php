@@ -22,22 +22,25 @@
         <div class="jumbotron jumbotron-fluid mb-2">
             <div class="container">
 
-                @if (isset($mensagem))
-                    {{-- @if (strpos($mensagem, 'excluído') === false)
-                  
-                @endif --}}
+                @if (isset($mensagem))                 
                     @if (strpos($mensagem, 'excluído') === false)
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ $mensagem }}</strong> .
                             <button type="button" class="btn-close" data-bs-dismiss="alert"
                                 aria-label="Close"></button>
                         </div>
-                    @else
+                    @elseif (strpos($mensagem, 'cadastrado') === false)
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>{{ $mensagem }}</strong> .
                             <button type="button" class="btn-close" data-bs-dismiss="alert"
                                 aria-label="Close"></button>
                         </div>
+                    @elseif (strpos($mensagem, 'Editado') === true)
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ $mensagem }}</strong> .
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    </div>
                     @endif
 
                 @endif

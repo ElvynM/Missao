@@ -40,6 +40,7 @@ class UsuariosController extends Controller
       $usuario = Usuarios::find($id);
 
     if(isset($usuario)) {
+        $request->session()->put('mensagem', "Usuário {$usuario->nome} Editado com Sucesso!");
         return view('usuarios.edit', [
         'usuarios' => $usuario,
       ]);
