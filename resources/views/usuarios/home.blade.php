@@ -70,27 +70,23 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                      
                         <form method="POST" action="/usuarios/criar" class="was-validated" class="needs-validation" novalidate>
                             @csrf
                             <div class="row mb-2">
                                 <div class="col">
-                                    <input type="text" name="nome" class="form-control is-valid" placeholder="Nome" required>
+                                    {{-- <input type="text" name="nome" class="form-control is-valid" placeholder="Nome" required>
                                     <div class="valid-feedback">Valid.</div>
-                                     <div class="invalid-feedback">Campo nome obrigatorio.</div>
+                                     <div class="invalid-feedback">Campo nome obrigatorio.</div> --}}
+
+                                     <input type="text" id="nome" name="nome" placeholder="Nome" class="@error('nome') is-invalid @enderror form-control" required>
+                                      @error('nome')<div class="text-danger">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="email" class="form-control is-valid" placeholder="Email"  required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Campo e-mail obrigatorio.</div>
+                                    <input type="email" name="email" class="form-control is-valid" placeholder="Email" min="3" class="@error('email') is-invalid @enderror form-control"  required>
+                                    @error('email')<div class="text-danger">{{ $message }}</div>@enderror
+                                    {{-- <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Campo e-mail obrigatorio.</div> --}}
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -135,7 +131,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="modal-footer">
+                            {{-- <div class="modal-footer">
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif --}}
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Close</button>
                                 <button class="btn btn-primary">Adicionar</button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UsuariosFormRequest;
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
 
@@ -20,13 +21,8 @@ class UsuariosController extends Controller
       ]);
   }
 
-  public function store(Request $request){
-      $request->validate(
-        [
-          'nome' => 'required','min:3',
-          'email' => 'required', 'unique:usuarios,email'
-        ]
-      );
+  public function store(UsuariosFormRequest $request){
+    
       $usuario = Usuarios::create($request->all());
       $request->session()->put('mensagem', "Usuário {$usuario->nome} cadastrado com Sucesso!");
   
