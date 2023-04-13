@@ -5,8 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
+    </script>      --}}
     <title>project</title>
 </head>
 
@@ -51,18 +59,18 @@
     <div class="container mb-2">
 
         <a href="usuarios/criar" class="btn btn-dark mb-4" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Adicionar</a>
+            data-bs-target="#my-modal">Adicionar</a>
 
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="my-modal" tabindex="-1" aria-labelledby="my-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="my-modalLabel">Modal title</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        @if ($errors->any())
+                        @if($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -71,19 +79,25 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" action="/usuarios/criar">
+                        <form method="POST" action="/usuarios/criar" class="was-validated" class="needs-validation" novalidate>
                             @csrf
                             <div class="row mb-2">
                                 <div class="col">
-                                    <input type="text" name="nome" class="form-control" placeholder="Nome">
+                                    <input type="text" name="nome" class="form-control is-valid" placeholder="Nome" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                     <div class="invalid-feedback">Campo nome obrigatorio.</div>
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="email" class="form-control" placeholder="Email">
+                                    <input type="text" name="email" class="form-control is-valid" placeholder="Email"  required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Campo e-mail obrigatorio.</div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <input type="text" name="telefone" class="form-control" placeholder="Telefone">
+                                    <input type="text" name="telefone" class="form-control"  placeholder="Telefone" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Campo telefone obrigatorio.</div>
                                 </div>
                                 <div class="col">
                                     <input type="text" name="endereco" class="form-control" placeholder="Endereco">
@@ -177,6 +191,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
         integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
     </script>
+
+    {{-- <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    <script src="/docs/5.0/assets/js/docs.min.js"></script>
+    <script async="" src="/docs/5.0/assets/js/validate-forms.js"></script> --}}
 </body>
 
 </html>
