@@ -25,6 +25,7 @@ Route::controller(UsuariosController::class)->group(function(){
     Route::get('/usuarios/edit/{id}','edit')->name('list_edit');
     Route::post('/usuarios/edit/{id}','update')->name('update');
     Route::get('/usuarios/delete/{id}','delete')->name('delete');
+    Route::get('/usuarios/export','export')->name('excel');
 });
 
 

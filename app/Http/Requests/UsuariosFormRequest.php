@@ -24,8 +24,14 @@ class UsuariosFormRequest extends FormRequest
         return [
             'nome' => ['required','min:3'],
             'email' => ['required', 'unique:usuarios,email'],
-            'telefone' => ['required','unique:usuarios,telefone'],
-            'genero' => ['required','unique:usuarios,genero'],
+            'telefone' => ['unique:usuarios,telefone,except,id'],
+            'endereco' => ['required'],
+            'cidade' => ['required'],
+            // 'complemento' => ['required'],
+            // 'dt_nascimento' => ['unique:usuarios,dt_nascimento'],
+            // 'dt_batismo' => ['unique:usuarios,dt_batismo'],
+            // 'dt_conversao' => ['unique:usuarios,dt_conversao'],
+            // 'genero' => ['required','unique:usuarios,genero'],
         ];
     }
 

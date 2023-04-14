@@ -83,7 +83,7 @@
                                       @error('nome')<div class="text-danger">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col">
-                                    <input type="email" name="email" class="form-control is-valid" placeholder="Email" min="3" class="@error('email') is-invalid @enderror form-control"  required>
+                                    <input type="email" name="email" class="form-control is-valid" placeholder="Email" class="@error('email') is-invalid @enderror form-control"  required>
                                     @error('email')<div class="text-danger">{{ $message }}</div>@enderror
                                     {{-- <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Campo e-mail obrigatorio.</div> --}}
@@ -92,8 +92,8 @@
                             <div class="row mb-2">
                                 <div class="col">
                                     <input type="text" name="telefone" class="form-control"  placeholder="Telefone" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Campo telefone obrigatorio.</div>
+                                    {{-- <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Campo telefone obrigatorio.</div> --}}
                                 </div>
                                 <div class="col">
                                     <input type="text" name="endereco" class="form-control" placeholder="Endereco">
@@ -125,22 +125,9 @@
                                         <option value="">Selecione um gênero</option>
                                         <option value="masculino">Masculino</option>
                                         <option value="Feminino">Feminino</option>
-                                        {{-- @foreach ($generos as $id => $genero)
-                                            <option value="{{ $id }}">{{ $genero }}</option>
-                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
-                            {{-- <div class="modal-footer">
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif --}}
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Close</button>
                                 <button class="btn btn-primary">Adicionar</button>
@@ -153,37 +140,45 @@
         </div>
 
         <div class="container">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Nº</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Telefone</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        @foreach ($usuarios as $usuario)
-                            <th scope="row"><?= $usuario->id ?></th>
-                            <td><?= $usuario->nome ?></td>
-                            <td><?= $usuario->telefone ?></td>
-                            <td><?= $usuario->email ?></td>
-                            <td>
-                                <a href="{{ route('list_edit', $usuario->id) }}" class="btn btn-primary">Editar</a>
-                                <a href="{{ route('delete', $usuario->id) }}" class="btn btn-danger">Excluir</a>
-                            </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-
-            </table>
+            <div class="table-responsive-sm mx-auto">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nº</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach ($usuarios as $usuario)
+                                <th scope="row"><?= $usuario->id ?></th>
+                                <td><?= $usuario->nome ?></td>
+                                <td><?= $usuario->telefone ?></td>
+                                <td><?= $usuario->email ?></td>
+                                <td>
+                                    <a href="{{ route('list_edit', $usuario->id) }}" class="btn btn-primary">Editar</a>
+                                    <a href="{{ route('delete', $usuario->id) }}" class="btn btn-danger">Excluir</a>
+                                </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
             <div class="d-flex justify-content-center">
                 {{ $usuarios->links('pagination::bootstrap-5') }}
             </div>
         </div>
+    
+    <div class="container">
+        <a href="{{ route('excel') }}">
+            <img src="{{ asset('midia/excel.png') }}" style="height: 60px;"/>
+        </a>
     </div>
-
+  
 
 
 
@@ -196,11 +191,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
         integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
     </script>
-
-    {{-- <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
-    <script src="/docs/5.0/assets/js/docs.min.js"></script>
-    <script async="" src="/docs/5.0/assets/js/validate-forms.js"></script> --}}
 </body>
 
 </html>

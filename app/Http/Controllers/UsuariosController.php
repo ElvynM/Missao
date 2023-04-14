@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsuariosExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuariosFormRequest;
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsuariosController extends Controller
 {
@@ -21,11 +23,14 @@ class UsuariosController extends Controller
       ]);
   }
 
+  public function export(){
+    return Excel::download(new UsuariosExport,'usuarios.xlsx');
+  }
+
   public function store(UsuariosFormRequest $request){
     
       $usuario = Usuarios::create($request->all());
       $request->session()->put('mensagem', "Usuário {$usuario->nome} cadastrado com Sucesso!");
-  
       return redirect('usuarios');
   }
 
